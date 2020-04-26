@@ -2,9 +2,9 @@ package com.cfx.demo.sort;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 
 public class MergeSort {
+
     @Test
     public void mergeSort() {
         int[] arr = {45,3,2,15,36,3,43,1,44,26};
