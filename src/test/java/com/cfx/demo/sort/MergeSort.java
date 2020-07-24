@@ -7,11 +7,9 @@ public class MergeSort {
 
     @Test
     public void mergeSort() {
-        int[] arr = {45,3,2,15,36,3,43,1,44,26};
-        mergeSort(arr,0,arr.length - 1);
-        for (int i : arr) {
-            System.out.print(i + " ");
-        }
+        int[] arr = {1,2,11,3,12,11,0};
+        mergeSort(arr,0,arr.length-1);
+        System.out.println("");
     }
 
     private void mergeSort(int[] arr,int l,int r) {
@@ -21,32 +19,32 @@ public class MergeSort {
 
         int mid = l - (l - r)/2;
         mergeSort(arr,l,mid);
-        mergeSort(arr,mid + 1,r);
+        mergeSort(arr,mid+1,r);
         merge(arr,l,mid,r);
     }
 
     private void merge(int[] arr, int l, int mid, int r) {
-        int[] temp = new int[r - l + 1];
-        for (int i = l; i <= r; i ++) {
-            temp[i-l] = arr[i];
-        }
-
+        int[] tmp = new int[arr.length];
+        int index = 0;
         int i = l;
         int j = mid + 1;
-        for (int k = l;k <= r; k++) {
+        while (i <= mid || j <= r) {
             if (i > mid) {
-                arr[k] = temp[j - l];
-                j++;
+                tmp[index++] = arr[j];
+                j ++;
             } else if (j > r) {
-                arr[k] = temp[i - l];
+                tmp[index++] = arr[i];
                 i++;
-            } else if (temp[i - l] > temp[j - l]) {
-                arr[k] = temp[j - l];
-                j++;
+            } else if (arr[i] < arr[j]) {
+                tmp[index++] = arr[i];
+                i++;
             } else {
-                arr[k] = temp[i - l];
-                i++;
+                tmp[index++] = arr[j];
+                j++;
             }
+        }
+        for (int d = 0; d < index;d++) {
+            arr[l + d] = tmp[d];
         }
     }
 }

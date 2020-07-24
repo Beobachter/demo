@@ -15,19 +15,39 @@ public class FastSort {
         if (p >= r) {
             return;
         }
-        int q = p;
-        for (int i = p; i < r; i++) {
-            if (arr[i] < arr[r]) {
-                int tem = arr[i];
-                arr[i] = arr[q];
-                arr[q] = tem;
-                q++;
+        int povit = r- (r - p)/2;
+        int i = p;
+        int j = r;
+        while (i < povit || j > povit) {
+            if (i >= povit) {
+                if (arr[povit] < arr[j]) {
+                    j--;
+                } else {
+                    int tmp = arr[povit];
+                    arr[povit] = arr[j];
+                    arr[j] = tmp;
+                    povit =  j;
+                }
+            } else if (j < povit) {
+                if (arr[povit] > arr[i]) {
+                    i++;
+                } else {
+                    int tmp = arr[povit];
+                    arr[povit] = arr[i];
+                    arr[i] = tmp;
+                    povit = i;
+                }
+            } else if (arr[i] > arr[povit] && arr[j] < arr[povit]) {
+                int tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            } else if (arr[i] <= arr[povit]) {
+                i++;
+            } else if (arr[j] >= arr[povit]) {
+                j--;
             }
         }
-        int tem = arr[q];
-        arr[q] = arr[r];
-        arr[r] = tem;
-        fastSort(arr,p,q - 1);
-        fastSort(arr,q + 1,r);
+        fastSort(arr,p,povit - 1);
+        fastSort(arr,povit + 1,r);
     }
 }
